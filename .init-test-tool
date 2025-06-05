@@ -1,0 +1,4 @@
+{
+    "command": "npm run test",
+    "working_directory": "/home/kavia/workspace/code-generation/githubinsight-107160-59b1c99f/github_insight"
+}
