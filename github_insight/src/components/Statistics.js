@@ -201,7 +201,7 @@ function Statistics({ stats }) {
       value,
       color: `hsl(${i * 47},68%,62%)`,
     }))
-    .filter(d => value > 0);
+    .filter(d => d.value > 0);
 
   // Search history bar chart
   const history = Array.isArray(stats?.history)
