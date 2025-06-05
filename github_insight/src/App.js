@@ -21,27 +21,37 @@ function App() {
   // View states
   const [view, setView] = useState("home");
   const [searchInput, setSearchInput] = useState("");
-  const [searchHistory, setSearchHistory] = useState([]);
+  const [searchHistory, setSearchHistoryState] = useState([]);
+
+  // On mount, load search history from localStorage
+  useEffect(() => {
+    setSearchHistoryState(getSearchHistory());
+  }, []);
+
+  // Update localStorage when searchHistory changes
+  useEffect(() => {
+    setSearchHistory(searchHistory);
+  }, [searchHistory]);
 
   // Placeholder: Example trending and stats data
   const trendingRepos = ["octocat/Hello-World", "facebook/react", "vercel/next.js"];
   const trendingUsers = ["torvalds", "gaearon", "yyx990803"];
   const statsPlaceholder = {
     searches: 43,
-    topSearch: "react",
+    topSearch: searchHistory[0] || "react",
     trendingLang: "JavaScript"
   };
 
   // Navigation handler
   const handleNav = (target) => setView(target);
 
-  // Search handler
+  // Search handler (updates both local state and storage)
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchInput.trim()) {
-      setSearchHistory(prev =>
-        [searchInput, ...prev.filter(q => q !== searchInput)].slice(0, 7)
-      );
+    const trimmed = searchInput.trim();
+    if (trimmed) {
+      addSearchQuery(trimmed);
+      setSearchHistoryState(getSearchHistory()); // Sync state from storage
       setView("search");
     }
   };
