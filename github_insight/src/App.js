@@ -34,8 +34,7 @@ function App() {
   }, [searchHistory]);
 
   // Placeholder: Example trending and stats data
-  const trendingRepos = ["octocat/Hello-World", "facebook/react", "vercel/next.js"];
-  const trendingUsers = ["torvalds", "gaearon", "yyx990803"];
+  // (Trending data is now fetched in component; only statsPlaceholder remains here.)
   const statsPlaceholder = {
     searches: 43,
     topSearch: searchHistory[0] || "react",
@@ -74,7 +73,7 @@ function App() {
           showResults={view === "search"}
           searchQuery={searchInput}
         />
-        <Trending trendingRepos={trendingRepos} trendingUsers={trendingUsers} />
+        <Trending />
       </>
     );
   } else if (view === "statistics") {
