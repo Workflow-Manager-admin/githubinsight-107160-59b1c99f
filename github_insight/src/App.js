@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Search from "./components/Search";
 import Trending from "./components/Trending";
 import Statistics from "./components/Statistics";
 import Profile from "./components/Profile";
 import Repositories from "./components/Repositories";
+import {
+  getSearchHistory,
+  addSearchQuery,
+  setSearchHistory
+} from "./utils/storage";
 
 /**
  * PUBLIC_INTERFACE
